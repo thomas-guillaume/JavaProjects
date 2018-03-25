@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Edit a Student</title>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<h2>Edit Student</h2>
+	</div>
+</div>
+<div id="content">
+	<ui:insert name="content">
+		<h:form>
+			<h:outputText value="Id : "/>
+			<h:inputText id="id" value="#{student.id}" required="true" requiredMessage="Do not change the id please" />
+			<br/><br/>
+			
+			<h:outputText value="First Name : "/>
+			<h:inputText id="firstname" value="#{student.firstname}" required="true" requiredMessage="Fill the first name please" validatorMessage="First name should contain at least 2 letters.">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
+			<h:message for="firstname" style="color:red"/>
+			<br/><br/>
+			
+			<h:outputText value="Last Name : "/>
+			<h:inputText id="lastname" value="#{student.lastname}" required="true" requiredMessage="Fill the last name please" validatorMessage="Last name should contain at least 2 letters.">
+				<f:validateLength minimum="2"/>
+			</h:inputText>
+			<h:message for="lastname" style="color:red"/>
+			<br/><br/>
+			
+			<h:outputText value="Email : "/>
+			<h:inputText id="email" value="#{student.email}" validatorMessage="Email should respect the mailing format.">
+				<f:validateRegex pattern="^[A-Za-z0-9+_.-]+@(.+)$"/>
+			</h:inputText>
+			<h:message for="email" style="color:red"/>
+			<br/><br/><br/>
+			
+			<h:commandButton value="Save" action="#{studentManager.updateStudent(student)}"/>
+		</h:form>
+		<br/>
+		<h:form><h:commandButton value="Cancel" action="list-student"/></h:form>
+	</ui:insert>
+</div>
+</body>
+</html>
